@@ -232,16 +232,17 @@ class Builder extends EloquentBuilder
 
     /**
      * Get the first record matching the attributes or create it.
-     *
+     * @param  array  $attributes
+     * @param  (\Closure(): array)|array  $values
      * @return Model|static
      */
-    public function firstOrCreate(array $attributes = [], array $values = [])
+    public function firstOrCreate(array $attributes = [], \Closure|array $values = [])
     {
         if (null !== ($instance = $this->where($attributes)->first())) {
             return $instance;
         }
 
-        return tap($this->newModelInstance(array_merge($attributes, $values)), static function ($instance): void {
+        return tap($this->newModelInstance(array_merge($attributes, value($values))), static function ($instance): void {
             $instance->save();
         });
     }
