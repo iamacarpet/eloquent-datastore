@@ -16,6 +16,10 @@ abstract class TestCase extends OrchestraTestCase
      */
     protected function setUp(): void
     {
+        if (!interface_exists(\Rennokki\QueryCache\Contracts\QueryCacheModuleInterface::class)) {
+            require_once __DIR__ . '/Stubs/QueryCacheStubs.php';
+        }
+
         // 1. Boot the Laravel application
         parent::setUp();
 
