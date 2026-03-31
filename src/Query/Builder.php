@@ -22,6 +22,13 @@ class Builder extends BaseBuilder implements QueryCacheModuleInterface
     public $endCursor   = false;
 
     /**
+     * The custom arguments for the PDOStatement::fetchAll / fetch functions.
+     *
+     * @var array
+     */
+    public array $fetchUsing = [];
+
+    /**
      * All the available clause operators.
      *
      * @var string[]
@@ -194,5 +201,18 @@ class Builder extends BaseBuilder implements QueryCacheModuleInterface
     public function cursorPaginate($perPage = 15, $columns = ['*'], $cursorName = 'cursor', $cursor = null)
     {
         return $this->paginateUsingCursor($perPage, $columns, $cursorName, $cursor);
+    }
+
+    /**
+     * Specify arguments for the PDOStatement::fetchAll / fetch functions.
+     *
+     * @param  mixed  ...$fetchUsing
+     * @return $this
+     */
+    public function fetchUsing(...$fetchUsing)
+    {
+        $this->fetchUsing = $fetchUsing;
+
+        return $this;
     }
 }
