@@ -19,6 +19,15 @@ namespace Rennokki\QueryCache\Traits {
             public function generatePlainCacheKey() { return ''; }
             public function getFromQueryCache() { return null; }
             public function getQueryCacheCallback() { return null; }
+            public function dontCache() { return $this; }
+            public function cacheFor($time) { return $this; }
+            public function cacheTags($tags) { return $this; }
+            public function cachePrefix($prefix) { return $this; }
+            public function cacheDriver($driver) { return $this; }
+            public function withPlainKey() { return $this; }
+            public function cacheBaseTags($tags) { return $this; }
+            public function recacheFindQuery() { return $this; }
+            public function flushQueryCacheWithTag($tag) { return $this; }
         }
     }
 }
