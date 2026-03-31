@@ -40,7 +40,10 @@ jobs:
           apt-get install -y google-cloud-cli google-cloud-sdk-datastore-emulator openjdk-21-jre-headless
 
       - name: Install Composer Dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: |
+          composer remove affordablemobiles/laravel-eloquent-query-cache --dev --no-update
+          composer remove affordablemobiles/laravel-eloquent-query-cache --no-update
+          composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Make Test Runner Script Executable
         run: chmod +x ./.github/run-tests-with-emulator.sh
